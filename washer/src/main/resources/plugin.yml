@@ -1,0 +1,5 @@
+name: WasherPlugin
+main: washer.WasherPlugin
+version: 1.0
+api-version: 1.13
+commands:
