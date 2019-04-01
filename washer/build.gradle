@@ -16,6 +16,19 @@ repositories {
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
     mavenCentral()
+    maven {
+    	url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+  	}
+  /*
+   As Spigot-API depends on the Bungeecord ChatComponent-API,
+  we need to add the Sonatype OSS repository, as Gradle,
+  in comparison to maven, doesn't want to understand the ~/.m2
+  directory unless added using mavenLocal(). Maven usually just gets
+  it from there, as most people have run the BuildTools at least once.
+  This is therefore not needed if you're using the full Spigot/CraftBukkit,
+  or if you're using the Bukkit API.
+  */
+  maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
 
 dependencies {
@@ -25,6 +38,16 @@ dependencies {
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
     
-    compile files('libs/spigot-api-1.13.2-R0.1-SNAPSHOT-shaded.jar')
+    compileOnly 'org.spigotmc:spigot-api:1.13.2-R0.1-SNAPSHOT'
+ 
     compile 'org.glassfish.tyrus:tyrus-container-grizzly-server:1.+'
+    
+    implementation 'com.google.code.gson:gson:2.8.5'
+}
+
+task deploy(type: Copy) {
+	dependsOn ":jar"
+	
+	from jar.archivePath
+	into deployDirectory
 }

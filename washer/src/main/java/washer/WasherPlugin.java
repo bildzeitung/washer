@@ -25,6 +25,9 @@ public class WasherPlugin extends JavaPlugin {
 	
     @Override
     public void onEnable() {
+    	WListener w = new WListener(log, server);
+    	getServer().getPluginManager().registerEvents(w, this);
+    	
     	try {
     		server.run();
     	} catch (Exception e) {
