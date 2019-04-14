@@ -9,14 +9,13 @@ import javax.websocket.OnClose;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
-@ServerEndpoint(value = "/")
+@ServerEndpoint(value = "/", decoders = { WDecoder.class })
 public class WSEndpoint {
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 	
 	@OnMessage
-    public String onMessage(String message, Session session) {
-		logger.info("Received " + message);
-        return message;
+    public void onMessage(Session session, WebsocketMessage wsm) {
+		logger.info("Received " + wsm.toString());
     }
 	
 	@OnOpen
