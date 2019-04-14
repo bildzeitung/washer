@@ -44,7 +44,7 @@ public class WListener implements Listener {
 			return;
 		}
 		String s = gson.toJson(event);
-		log.info("Received a PlayerMoveEvent" + s);
+		log.info("[->MC] Received a PlayerMoveEvent: " + s);
 		server.sendToClients(s);
 	}
 }
