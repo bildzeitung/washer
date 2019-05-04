@@ -1,0 +1,7 @@
+# dev
+black
+flake8
+
+# module
+-e washer
+-e demo
