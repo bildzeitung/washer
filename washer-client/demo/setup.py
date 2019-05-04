@@ -56,7 +56,9 @@ setup(
     url=URL,
     packages=find_packages(exclude=('tests',)),
     entry_points={
-        'console_scripts': ['washerdemo=washerclientdemo.main:cli'],
+        'console_scripts': ['washerdemo=washerclientdemo.main:cli',
+                            'simple=washerclientdemo.simple:cli',
+        ],
     },
     install_requires=REQUIRED,
     extras_require=EXTRAS,
