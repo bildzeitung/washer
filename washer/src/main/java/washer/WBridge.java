@@ -7,7 +7,7 @@ import javax.websocket.Session;
 
 public class WBridge {
 	private static final WBridge INSTANCE = new WBridge();
-	public WServer server;
+	public WasherPlugin plugin;
 	private static Set<Session> sessions = new HashSet<Session>();
 	
 	private WBridge() {
@@ -28,5 +28,13 @@ public class WBridge {
 	
 	public Set<Session> getSessions() {
 		return sessions;
+	}
+	
+	public void setWasher(WasherPlugin w) {
+		this.plugin = w;
+	}
+	
+	public WasherPlugin getServer() {
+		return this.plugin;
 	}
 }

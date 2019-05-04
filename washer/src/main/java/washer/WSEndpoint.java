@@ -16,6 +16,8 @@ public class WSEndpoint {
 	@OnMessage
     public void onMessage(Session session, WebsocketMessage wsm) {
 		logger.info("Received " + wsm.toString());
+		WasherPlugin plugin = WBridge.getInstance().getServer() ;
+		plugin.process(wsm);
     }
 	
 	@OnOpen

@@ -7,8 +7,11 @@
 package washer;
 
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.World;
+
 
 /* WasherPlugin
  * 
@@ -21,6 +24,7 @@ public class WasherPlugin extends JavaPlugin {
 	public WasherPlugin() {
 		log = getLogger();
 		server = new WServer();
+		WBridge.getInstance().setWasher(this);
 	}
 	
     @Override
@@ -39,5 +43,16 @@ public class WasherPlugin extends JavaPlugin {
     @Override
     public void onDisable() {
     	server.stop();
+    }
+    
+    public void process(WebsocketMessage msg) {
+    	log.info("v: " + msg.verb + ", t: " + msg.type);
+    	if ((msg.verb.equals("get")) && (msg.type.equals("worlds"))) {
+    		String t = "[" + getServer().getWorlds().stream()
+    				.map(x -> x.getName())
+    				.map(x -> "\"" + x + "\"")
+    				.collect(Collectors.joining(",")) + "]";
+    		server.sendToClients(t);
+    	}
     }
 }
