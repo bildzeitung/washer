@@ -1,6 +1,7 @@
 # dev
 black
 flake8
+sphinx
 
 # module
 -e washer
